@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Contact List";
+}
+<style type="text/css">
+    .divHead {
+    }
+
+    .divList {
+    }
+</style>
+<h2> Contact Details</h2>
+<div ng-app="myContactApp">
+    <div ng-controller="contactCtrl" ng-init="GetAllContactDetails">
+        <div Class="divList">
+            <p Class="divHead">List of Contacts</p>
+            <table cellpadding="12" Class="table table-bordered table-hover">
+                <tr style="background-color: slategray; font-weight: bold">
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Email Id</td>
+                    <td>Phone Number</td>
+                    <td>Status</td>
+                    <td>Action</td>
+                </tr>
+                <tr ng-repeat="contact in Contacts">
+                    <td>{{contact.FirstName}}</td>
+                    <td>{{contact.LastName}}</td>
+                    <td>{{contact.EmailId}}</td>
+                    <td>{{contact.PhoneNumber}}</td>
+                    <td>{{contact.Status ? "Active" : "InActive" }}</td>
+                    <td>
+                        <span ng-click="EditContactDetails(contact)" class="btn btn-primary">Edit</span>
+                        <span ng-click="DeleteContactDetails(contact)" class="btn btn-danger">Delete</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <span class="btn btn-default" ng-click="AddOrUpdateDiv()">
+            Add Contact Details
+        </span>
+        <div ng-show="divContact">
+            <p class="divHead"></p>
+            <table class="table">
+                <tr>
+                    <td><b>{{Action}} Contact Details</b></td>
+                </tr>
+                <tr>
+                    <td><b>First Name</b></td>
+                    <td><input type="text" ng-model="FirstName" required /></td>
+                    <td><b>First Name</b></td>
+                    <td><input type="text" ng-model="LastName" required /></td>
+                </tr>
+                <tr>
+                    <td><b>Email Id</b></td>
+                    <td><input type="text" ng-model="EmailId" required /></td>
+                    <td><b>Phone Number</b></td>
+                    <td><input type="text" ng-model="PhoneNumber" required /></td>
+                </tr>
+                <tr>
+                    <td><b>Status</b></td>
+                    <td>
+                        <select ng-model="Status" se>
+                            <option value="true"> Active</option>
+                            <option value="false"> InActive</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="button" class="btn btn-default" value="Save" ng-click="AddOrUpdateContactDetails()" />
+                        <input type="button" class="btn btn-danger" value="Cancel" ng-click="Cancel()" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

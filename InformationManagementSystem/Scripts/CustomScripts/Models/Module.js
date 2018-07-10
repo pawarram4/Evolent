@@ -1,0 +1,1 @@
+﻿var myContactApp = angular.module("myContactApp", []);
