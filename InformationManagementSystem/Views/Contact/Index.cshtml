@@ -38,23 +38,54 @@
         <span class="btn btn-default" ng-click="AddOrUpdateDiv()">
             Add Contact Details
         </span>
+        
+        <form name="frmContact">
         <div ng-show="divContact">
-            <p class="divHead"></p>
+            <p class="divHead"></p>     
             <table class="table">
                 <tr>
-                    <td><b>{{Action}} Contact Details</b></td>
+                    <td colspan="3"><b>{{Action}} Contact Details</b></td>
                 </tr>
                 <tr>
                     <td><b>First Name</b></td>
-                    <td><input type="text" ng-model="FirstName" required /></td>
+                    <td>
+                        <input type="text" ng-model="FirstName" ng-minlength="6" ng-maxlength="12" ng-pattern="/^\w+$/" required />
+                        <div ng-messages="frmContact.FirstName.$error">
+                            <p ng-message="minlength">First Name should have at least 6 characters.</p>
+                            <p ng-message="maxlength">First Name should have at most 12 characters.</p>
+                            <p ng-message="required">Providing a username is mandatory.</p>
+                            <p ng-message="pattern">First Name can only be alphanumeric with an optional underscore.</p>
+                        </div>
+                    </td>
+                   
                     <td><b>First Name</b></td>
-                    <td><input type="text" ng-model="LastName" required /></td>
+                    <td>
+                        <input type="text" ng-model="LastName" ng-minlength="6" ng-maxlength="12" ng-pattern="/^\w+$/" required/>
+                        <div ng-messages="frmContact.LastName.$error">
+                            <p ng-message="minlength">Last Name should have at least 6 characters.</p>
+                            <p ng-message="maxlength">Last Name should have at most 12 characters.</p>
+                            <p ng-message="required"> Last Name is mandatory.</p>
+                            <p ng-message="pattern">Last Name can only be alphanumeric with an optional underscore.</p>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td><b>Email Id</b></td>
-                    <td><input type="text" ng-model="EmailId" required /></td>
+                    <td><input type="email" ng-model="EmailId" required />
+                        <div ng-messages="frmContact.EmailId.$error">
+                            <p ng-message="email">Please enter a valid email address.</p>
+                            <p ng-message="required">Providing an email is mandatory.</p>
+                        </div>
+                    </td>
                     <td><b>Phone Number</b></td>
-                    <td><input type="text" ng-model="PhoneNumber" required /></td>
+                    <td><input type="text" ng-model="PhoneNumber"  ng-minlength="6" ng-maxlength="12" ng-pattern="/^[0-9]/" required />
+                        <div ng-messages="frmContact.PhoneNumber.$error">
+                            <p ng-message="minlength">PhoneNumber should have at least 10 numbers.</p>
+                            <p ng-message="maxlength">PhoneNumber should have at least 10 numbers.</p>
+                            <p ng-message="required">PhoneNumber</p>
+                            <p ng-message="pattern">Phone should contains only numbers</p>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td><b>Status</b></td>
@@ -63,13 +94,17 @@
                             <option value="true"> Active</option>
                             <option value="false"> InActive</option>
                         </select>
+                        <div ng-messages="frmContact.Status.$error">
+                            <p ng-message="required">Select Status</p>
+                        </div>
                     </td>
                     <td>
-                        <input type="button" class="btn btn-default" value="Save" ng-click="AddOrUpdateContactDetails()" />
+                        <input type="button" class="btn btn-default" value="Save" ng-click="frmContact.$valid && AddOrUpdateContactDetails()" />
                         <input type="button" class="btn btn-danger" value="Cancel" ng-click="Cancel()" />
                     </td>
                 </tr>
-            </table>
+            </table>        
         </div>
+        </form>
     </div>
 </div>
