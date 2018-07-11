@@ -1,6 +1,6 @@
 ﻿myContactApp.service("myContactService", function ($http) {
     this.getAllContactDetails = function() {
-        return $http.get("Contact/GetAllContactDetails");
+        return $http.get("GetAllContactDetails");
     };
 
     this.getContactDetailsById = function(contactId) {
